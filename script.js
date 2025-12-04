@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.querySelector('header');
     const links = document.querySelectorAll('nav a[href^="#"]');
+    const contactForm = document.querySelector('.contact-form');
+    const contactNameInput = document.getElementById('contact-name');
+    const whatsappNumber = '5513978283404'; // Número MSO Assessoria
 
     // 1. Efeito de scroll suave para links âncora
     links.forEach(link => {
@@ -31,12 +34,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 3. Simulação de envio do formulário de contato
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
+    // 3. Redirecionamento para WhatsApp com nome customizado
+    if (contactForm && contactNameInput) {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Mensagem enviada com sucesso! A MSO Assessoria entrará em contato em breve.');
+            
+            const name = contactNameInput.value.trim();
+            
+            if (name === "") {
+                alert("Por favor, digite seu nome completo.");
+                return;
+            }
+
+            // Mensagem de base
+            let message = `Olá! Meu nome é ${name}. Vi o site da MSO Assessoria e gostaria de saber mais sobre os serviços.`;
+            
+            // Codifica a mensagem para URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Constrói o link do WhatsApp
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // Abre o link em uma nova aba
+            window.open(whatsappLink, '_blank');
+            
+            // Opcional: Limpa o campo após o envio
             contactForm.reset();
         });
     }

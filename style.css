@@ -1,10 +1,10 @@
 /* PALETA DE CORES */
 :root {
-    --color-mso-blue: #0077FF;          /* Azul MSO (Botões e Destaques) */
-    --color-mso-orange: #FF9933;        /* Laranja/Dourado (Bloco Administrativo) */
-    --color-mso-marine: #0A1931;        /* Azul Marinho (Fundos Principais) */
-    --color-white: #FFFFFF;             /* Branco */
-    --color-text-light: #F0F0F0;        /* Texto em fundos escuros */
+    --color-mso-blue: #0077FF;        /* Azul MSO (Botões e Destaques) */
+    --color-mso-orange: #FF9933;      /* Laranja/Dourado (Bloco Administrativo) */
+    --color-mso-marine: #0A1931;      /* Azul Marinho (Fundos Principais) */
+    --color-white: #FFFFFF;           /* Branco */
+    --color-text-light: #F0F0F0;      /* Texto em fundos escuros */
 }
 
 /* RESET E BASE */
@@ -252,17 +252,45 @@ nav a:hover {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    /* Estilo da nova área de formulário/WhatsApp */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.contact-form input, .contact-form textarea {
+.contact-form h3 {
+    color: var(--color-mso-orange);
+    margin-bottom: 5px;
+}
+
+.contact-form p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.contact-form input {
     padding: 12px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 1em;
 }
 
-.cta-button-form {
-    align-self: flex-start; /* Alinha o botão à esquerda */
+/* Estilo específico para o botão do WhatsApp */
+.whatsapp-button {
+    background-color: #25d366 !important; /* Verde WhatsApp */
+    color: var(--color-white) !important;
+    text-align: center;
+    align-self: stretch; /* Ocupa a largura total da coluna */
+    margin-top: 5px; /* Ajuste a margem superior */
+}
+
+.whatsapp-button:hover {
+    background-color: #128c7e !important;
+}
+
+.whatsapp-button i {
+    margin-right: 10px;
 }
 
 /* FOOTER */
@@ -337,10 +365,6 @@ footer {
 
     .contact-form {
         margin-top: 30px;
-    }
-
-    .cta-button-form {
-        align-self: stretch; /* Ocupa a largura total */
     }
 
     .whatsapp-float {
