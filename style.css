@@ -78,6 +78,7 @@ header {
 .logo {
     height: 50px; /* Ajuste conforme o tamanho da sua logo */
     filter: brightness(1.2);
+    border-radius: 8px; /* Ajuste o valor conforme o grau de arredondamento desejado */
 }
 
 nav a {
@@ -375,4 +376,5 @@ footer {
         font-size: 25px;
         line-height: 50px;
     }
+
 }
