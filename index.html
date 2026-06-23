@@ -4,18 +4,512 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MSO Assessoria Administrativa & Consultoria Acadêmica</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ==========================================
+           1. PALETA DE CORES E IDENTIDADE MSO 
+           ========================================== */
+        :root {
+            --color-mso-blue: #0077FF;        /* Azul MSO (Destaques e CTAs) */
+            --color-mso-orange: #FF9933;      /* Laranja/Dourado (Setor Administrativo) */
+            --color-mso-marine: #0A1931;      /* Azul Marinho (Cabeçalho, Rodapé e Fundo) */
+            --color-white: #FFFFFF;           /* Superfícies limpas */
+            --color-text-light: #F0F0F0;      /* Texto de alto contraste */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--color-white);
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* CONFIGURAÇÃO DE COMPONENTES INTERATIVOS (BOTÕES) */
+        .cta-button-nav, .cta-button-hero, .cta-button-form {
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button-nav {
+            background-color: var(--color-mso-orange);
+            color: var(--color-white);
+        }
+
+        .cta-button-nav:hover {
+            background-color: #ffb86e;
+        }
+
+        .cta-button-hero, .cta-button-form {
+            background-color: var(--color-mso-blue);
+            color: var(--color-white);
+            font-size: 1.1em;
+            margin-top: 20px;
+        }
+
+        .cta-button-hero:hover, .cta-button-form:hover {
+            background-color: #005ac9;
+        }
+
+        /* CABEÇALHO DA ESTRUTURA (STICKY NAV) */
+        header {
+            background-color: var(--color-mso-marine);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* EFEITO RELEVISTA INTERATIVO 3D NA LOGO */
+        /* ==========================================
+   EFEITO 3D ULTRA CALIBRADO NA LOGO MSO
+   ========================================== */
+.logo {
+    height: 55px;
+    border-radius: 8px;
+    background-color: var(--color-white); /* Fundo branco rígido para destacar a sombra */
+    padding: 4px;
+    display: inline-block;
+    
+    /* 1. Efeito Chanfrado (Borda interna que imita plástico/vidro 3D) */
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #b5b5b5;
+    border-bottom: 2px solid #919191;
+
+    /* 2. Sombra projetada para dar volume físico (Profundidade) */
+    box-shadow: 
+        0px 5px 10px rgba(0, 0, 0, 0.5), 
+        0px 1px 3px rgba(0, 0, 0, 0.3);
+        
+    /* 3. Inclinação Tridimensional Realística (Perspectiva de observador) */
+    transform: perspective(600px) rotateX(12deg) rotateY(-12deg) rotateZ(-1deg);
+    
+    /* Transição suave para quando passar o mouse */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+/* Interação Dinâmica: Quando passa o mouse por cima */
+.logo:hover {
+    /* O objeto "salta" em direção ao usuário e fica reto */
+    transform: perspective(600px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.1);
+    
+    /* A sombra se distancia e suaviza, simulando que a logo flutuou para longe do fundo */
+    box-shadow: 
+        0px 15px 20px rgba(0, 0, 0, 0.6), 
+        0px 3px 6px rgba(0, 0, 0, 0.4);
+}
+
+        nav a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 0;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-mso-blue);
+        }
+
+        /* APRESENTAÇÃO DE ELITE (HERO SECTION) */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('mso.jpg') no-repeat center center/cover;
+            color: var(--color-white);
+            text-align: center;
+            padding: 100px 20px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: var(--color-text-light);
+        }
+
+        /* SEÇÃO DE CULTURA E VALORES */
+        .about {
+            background-color: var(--color-white);
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .about h2 {
+            color: var(--color-mso-marine);
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        .values-grid {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .value-item {
+            flex-basis: 30%;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f7f7f7;
+            transition: transform 0.3s;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-item i {
+            font-size: 2.5em;
+            color: var(--color-mso-blue);
+            margin-bottom: 15px;
+        }
+
+        .value-item h3 {
+            color: var(--color-mso-marine);
+            margin-bottom: 10px;
+        }
+
+        /* VITRINE DE SERVIÇOS E SOLUÇÕES */
+        .services {
+            background-color: #f0f4f8;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .services h2 {
+            color: var(--color-mso-marine);
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        .service-block {
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px auto;
+            text-align: left;
+            max-width: 900px;
+        }
+
+        .admin-block {
+            background-color: var(--color-mso-orange);
+            color: var(--color-white);
+        }
+
+        .academic-block {
+            background-color: var(--color-mso-blue);
+            color: var(--color-white);
+        }
+
+        .service-block h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .service-block ul {
+            list-style: none;
+        }
+
+        .service-block ul li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .service-block ul li:last-child {
+            border-bottom: none;
+        }
+
+        /* CAPTURA E CONVERSÃO (CONTATO) */
+        .contact {
+            background-color: var(--color-mso-marine);
+            color: var(--white);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 40px;
+            font-size: 2em;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .contact-info i {
+            color: var(--color-mso-orange);
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .contact-form {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .contact-form h3 {
+            color: var(--color-mso-orange);
+            margin-bottom: 5px;
+        }
+
+        .contact-form p {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .contact-form input {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .whatsapp-button {
+            background-color: #25d366 !important;
+            color: var(--color-white) !important;
+            text-align: center;
+            align-self: stretch;
+            margin-top: 5px;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128c7e !important;
+        }
+
+        .whatsapp-button i {
+            margin-right: 10px;
+        }
+
+        footer {
+            background-color: #05101f;
+            color: var(--color-text-light);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+        }
+
+        /* ==========================================
+           2. COMPONENTE INTEGRADO DO CHATBOT ACADÊMICO
+           ========================================== */
+        #chatbot-container {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 10000;
+        }
+
+        #chatbot-btn {
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+
+        #chatbot-window {
+            position: fixed;
+            bottom: 115px;
+            right: 40px;
+            width: 380px;
+            max-width: calc(100vw - 40px);
+            height: 75vh;
+            max-height: 560px;
+            background-color: var(--color-white);
+            border-radius: 12px;
+            box-shadow: 0 8px 35px rgba(0,0,0,0.35);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            animation: cbFadeIn 0.3s ease-out;
+        }
+
+        @keyframes cbFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        
+        #chatbot-header {
+            background-color: var(--color-mso-marine);
+            color: var(--color-white);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--color-mso-orange);
+        }
+
+        #chat-messages {
+            flex: 1;
+            padding: 1.2rem;
+            overflow-y: auto;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .bot-msg {
+            background-color: #e3f2fd;
+            color: var(--color-mso-marine);
+            align-self: flex-start;
+            border-top-left-radius: 2px;
+        }
+
+        .user-msg {
+            background-color: var(--color-mso-blue);
+            color: var(--color-white);
+            align-self: flex-end;
+            border-top-right-radius: 2px;
+        }
+
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .reply-btn {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-mso-blue);
+            color: var(--color-mso-blue);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .reply-btn:hover {
+            background-color: var(--color-mso-blue);
+            color: var(--color-white);
+        }
+
+        #chat-input-area {
+            padding: 0.8rem;
+            display: flex;
+            gap: 8px;
+            background-color: var(--color-white);
+            border-top: 1px solid #eee;
+        }
+
+        #chat-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            padding: 10px 16px;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        #send-chat {
+            background-color: var(--color-mso-blue);
+            color: var(--color-white);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* LAYOUT ADAPTÁVEL (DISPOSITIVOS MÓVEIS) */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; padding-bottom: 10px; }
+            nav { margin-top: 10px; text-align: center; }
+            nav a { margin: 0 8px; display: inline-block; font-size: 0.9em; }
+            .hero h1 { font-size: 2em; }
+            .values-grid { flex-direction: column; }
+            .value-item { flex-basis: 100%; margin-bottom: 15px; }
+            .contact-grid { flex-direction: column; }
+            .contact-form { margin-top: 30px; }
+            #chatbot-window { bottom: 90px; right: 15px; max-width: calc(100vw - 30px); height: 65vh; }
+            #chatbot-container { bottom: 15px; right: 15px; }
+        }
+    </style>
 </head>
 <body>
 
     <header id="home">
         <div class="container header-content">
-            <img src="img/mso3.jpg" class="logo">
+            <img src="img/mso3.jpg" class="logo" alt="MSO Assessoria">
             <nav>
                 <a href="#home">Início</a>
                 <a href="#servicos">Serviços</a>
-                <a href="#academico">Acadêmico</a>
+                <a href="#academico">Académico</a>
                 <a href="#contato" class="cta-button-nav">Fale Conosco</a>
             </nav>
         </div>
@@ -23,7 +517,7 @@
 
     <section class="hero">
         <div class="container">
-            <h1>PROFISSIONAL EM ADMINISTRAÇÃO & CONSULTORIA ACADÊMICA</h1>
+            <h1>PROFISSIONAL EM ADMINISTRAÇÃO & CONSULTORIA ACADÉMICA</h1>
             <p>MSO ASSESSORIA ADMINISTRATIVA: Transparência, Competência, Integridade e Profissionalismo.</p>
             <a href="#contato" class="cta-button-hero">Otimize seu Negócio ou Carreira. Solicite uma Consultoria Agora!</a>
         </div>
@@ -36,17 +530,17 @@
                 <div class="value-item">
                     <i class="fas fa-briefcase"></i>
                     <h3>Profissionalismo</h3>
-                    <p>Gestão e Reestruturação com foco em resultados sólidos para o seu negócio.</p>
+                    <p>Gestão e Reestruturações focadas na eficiência operacional corporativa.</p>
                 </div>
                 <div class="value-item">
                     <i class="fas fa-graduation-cap"></i>
                     <h3>Especialização</h3>
-                    <p>Suporte completo, personalizado e estratégico para a sua jornada universitária.</p>
+                    <p>Suporte de alto padrão metodológico para o desenvolvimento da sua pesquisa acadêmica.</p>
                 </div>
                 <div class="value-item">
                     <i class="fas fa-shield-alt"></i>
                     <h3>Confiança</h3>
-                    <p>Ética, transparência e integridade em todos os processos e documentações.</p>
+                    <p>Entrega pontual, ética inabalável e sigilo absoluto garantidos em contrato.</p>
                 </div>
             </div>
         </div>
@@ -60,24 +554,24 @@
                 <h3><i class="fas fa-handshake"></i> Gestão Empresarial e Documental</h3>
                 <ul>
                     <li>Gestão Administrativa</li>
-                    <li>Reestruturação Organizacional e Administrativa (em formato PJ)</li>
-                    <li>Abertura de Empresa</li>
-                    <li>Elaboração de Currículo</li>
-                    <li>Serviço de Secretaria Remota</li>
-                    <li>Organizações Documentais</li>
-                    <li>Declaração de Imposto de Renda</li>
+                    <li>Reestruturação Organizacional e Administrativa (Formato PJ)</li>
+                    <li>Processos de Abertura de Empresas</li>
+                    <li>Elaboração Estratégica de Currículos Profissionais</li>
+                    <li>Gestão de Secretaria Remota de Alta Performance</li>
+                    <li>Organização Digital de Documentações</li>
+                    <li>Declarações de Imposto de Renda</li>
                 </ul>
             </div>
 
             <div id="academico" class="service-block academic-block">
-                <h3><i class="fas fa-book-open"></i> Suporte Acadêmico Completo</h3>
+                <h3><i class="fas fa-book-open"></i> Suporte Académico Completo</h3>
                 <ul>
-                    <li>Assessoria Acadêmica</li>
-                    <li>Trabalhos Acadêmicos (Consultar)</li>
-                    <li>Administração do Portal do Aluno</li>
-                    <li>Relatório de Estágio</li>
-                    <li>Projetos e TCC</li>
-                    <li>Portfólios</li>
+                    <li>Assessoria Estratégica Académica</li>
+                    <li>Orientação de Trabalhos Científicos e Acadêmicos</li>
+                    <li>Gestão Operacional de Portais do Aluno</li>
+                    <li>Estruturação e Correção de Relatórios de Estágio</li>
+                    <li>Desenvolvimento e Formatação Normativa de TCC e Monografias</li>
+                    <li>Elaboração de Portfólios Universitários Complexos</li>
                 </ul>
             </div>
         </div>
@@ -94,7 +588,7 @@
                 </div>
                 <form class="contact-form">
                     <h3>Atendimento Imediato</h3>
-                    <p>Digite seu nome e clique no botão para iniciar a conversa via WhatsApp:</p>
+                    <p>Introduza o seu nome e clique no botão para iniciar a conversa via WhatsApp:</p>
                     <input type="text" id="contact-name" placeholder="Seu Nome Completo" required>
                     <button type="submit" class="cta-button-form whatsapp-button">
                         <i class="fab fa-whatsapp"></i> Iniciar Conversa
@@ -106,16 +600,201 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 MSO Assessoria Administrativa. Todos os direitos reservados.</p>
+            <p>&copy; 2026 MSO Assessoria Administrativa. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/5513978283404?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20a%20assessoria%20da%20MSO." target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+    <div id="chatbot-container">
+        <div id="chatbot-window">
+            <div id="chatbot-header">
+                <div><strong>Consultor MSO Académico</strong><br><small>Triagem e Análise de TCC</small></div>
+                <i class="fas fa-times" style="cursor: pointer;" onclick="toggleChat()"></i>
+            </div>
+            <div id="chat-messages"></div>
+            <div id="typing-indicator" style="margin-left: 20px; font-style: italic; font-size: 0.8rem; color: #888; padding: 5px; display: none;">O Consultor está a analisar...</div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Responda aqui...">
+                <button id="send-chat" onclick="handleUserInput()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <div id="chatbot-btn" onclick="toggleChat()"><i class="fab fa-whatsapp"></i></div>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            const links = document.querySelectorAll('nav a[href^="#"]');
+            const contactForm = document.querySelector('.contact-form');
+            const contactNameInput = document.getElementById('contact-name');
+            const whatsappNumber = '5513978283404';
+
+            // Comportamento de Scroll Suave Interativo
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = header.offsetHeight;
+                        const topPosition = targetElement.offsetTop - headerHeight;
+                        window.scrollTo({ top: topPosition, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Controle Dinâmico da Barra de Navegação (Sombreamento)
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Gerenciador de Envio de Contato Tradicional
+            if (contactForm && contactNameInput) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const name = contactNameInput.value.trim();
+                    if (name === "") return;
+                    let message = `Olá! Meu nome é ${name}. Vi o site da MSO Assessoria e gostaria de saber mais sobre os serviços.`;
+                    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                    contactForm.reset();
+                });
+            }
+        });
+
+        // MECANISMO INTERATIVO DO CHATBOT - ESTRUTURA DO FUNIL DE CAPTURA
+        const chatMessages = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
+        let step = 0;
+        let tccData = { nome: '', curso: '', tema: '', prazo: '', pesquisa: '', andamento: '' };
+
+        function toggleChat() {
+            const win = document.getElementById('chatbot-window');
+            const isOpen = win.style.display === 'flex';
+            win.style.display = isOpen ? 'none' : 'flex';
+            if (!isOpen && chatMessages.innerHTML === '') {
+                startAcademicChat();
+            }
+        }
+
+        function showTyping(show) {
+            typingIndicator.style.display = show ? 'block' : 'none';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addMessage(text, type, options = []) {
+            const div = document.createElement('div');
+            div.className = 'msg ' + (type === 'bot' ? 'bot-msg' : 'user-msg');
+            div.innerText = text;
+            chatMessages.appendChild(div);
+
+            if (options.length > 0) {
+                const replyDiv = document.createElement('div');
+                replyDiv.className = 'quick-replies';
+                options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'reply-btn';
+                    btn.innerText = opt;
+                    btn.onclick = () => handleOption(opt);
+                    replyDiv.appendChild(btn);
+                });
+                chatMessages.appendChild(replyDiv);
+            }
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function startAcademicChat() {
+            showTyping(true);
+            setTimeout(() => {
+                showTyping(false);
+                addMessage("Olá! Sou o Consultor de Projetos da MSO. Para iniciarmos a triagem da sua assessoria de TCC, qual é o seu nome completo?", "bot");
+                step = 1;
+            }, 900);
+        }
+
+        function handleUserInput() {
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if (!text) return;
+            input.value = '';
+            processStep(text);
+        }
+
+        function handleOption(opt) {
+            processStep(opt);
+        }
+
+        function processStep(text) {
+            addMessage(text, "user");
+            showTyping(true);
+
+            setTimeout(() => {
+                showTyping(false);
+                
+                if (step === 1) {
+                    tccData.nome = text;
+                    addMessage(`Perfeito, ${text}! Para qual curso de graduação ou pós-graduação é o seu trabalho?`, "bot");
+                    step = 2;
+                } else if (step === 2) {
+                    tccData.curso = text;
+                    addMessage("Você já possui um tema definido ou precisa de auxílio para delimitá-lo? Se sim, qual é o tema?", "bot", ["Preciso de ajuda com o tema"]);
+                    step = 3;
+                } else if (step === 3) {
+                    tccData.tema = text;
+                    addMessage("Qual é o seu prazo final de entrega do material completo na faculdade?", "bot", ["Menos de 1 mês (Urgente)", "De 1 a 3 meses", "Mais de 3 meses"]);
+                    step = 4;
+                } else if (step === 4) {
+                    tccData.prazo = text;
+                    addMessage("Qual o modelo de pesquisa exigido pelo seu manual?", "bot", ["Revisão Bibliográfica (Livros/artigos)", "Pesquisa de Campo (Estudo de caso/dados)", "Ainda não sei"]);
+                    step = 5;
+                } else if (step === 5) {
+                    tccData.pesquisa = text;
+                    addMessage("Em qual estágio o projeto se encontra agora?", "bot", ["Do zero (Não comecei nada)", "Já tenho o Pré-Projeto pronto", "Já tenho capítulos escritos"]);
+                    step = 6;
+                } else if (step === 6) {
+                    tccData.andamento = text;
+                    addMessage(`Tudo anotado! Analisamos os dados iniciais do seu projeto de ${tccData.curso}. Deseja enviar esses detalhes agora para nossa equipe processar e gerar o valor do seu orçamento?`, "bot", ["Sim, gerar meu orçamento!", "Não, obrigado."]);
+                    step = 7;
+                } else if (step === 7) {
+                    if (text.includes("Sim")) {
+                        addMessage("Gerando a sua ficha de avaliação académica com prioridade...", "bot");
+                        
+                        const zapMessage = `Olá MSO, solicito orçamento para assessoria de TCC:\n\n` +
+                                           `- *Nome*: ${tccData.nome}\n` +
+                                           `- *Curso*: ${tccData.curso}\n` +
+                                           `- *Tema*: ${tccData.tema}\n` +
+                                           `- *Prazo*: ${tccData.prazo}\n` +
+                                           `- *Metodologia*: ${tccData.pesquisa}\n` +
+                                           `- *Estágio Atual*: ${tccData.andamento}`;
+
+                        const link = document.createElement('a');
+                        link.href = "https://wa.me/5513978283404?text=" + encodeURIComponent(zapMessage);
+                        link.className = "reply-btn";
+                        link.style.display = "block";
+                        link.style.marginTop = "10px";
+                        link.style.textAlign = "center";
+                        link.style.padding = "10px";
+                        link.style.backgroundColor = "var(--color-mso-orange)";
+                        link.style.color = "var(--color-white)";
+                        link.style.fontWeight = "bold";
+                        link.style.textDecoration = "none";
+                        link.style.borderRadius = "5px";
+                        link.innerText = "Enviar Ficha para Análise no WhatsApp";
+                        chatMessages.appendChild(link);
+                    } else {
+                        addMessage("Entendido. Se quiser reconfigurar os dados da sua simulação, introduza uma nova mensagem.", "bot");
+                    }
+                    step = 8;
+                } else {
+                    addMessage("Como posso ajudar agora?", "bot", ["Nova Simulação de TCC"]);
+                    step = 1;
+                }
+            }, 1000);
+        }
+
+        document.getElementById('chat-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') handleUserInput(); });
+    </script>
 </body>
-
 </html>
-
